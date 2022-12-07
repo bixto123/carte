@@ -58,7 +58,7 @@ class Formulaire extends React.Component {
           <textarea value={this.state.explication} onChange={this.handleChangeExplication} />
         </label>
         <br />
-        <input type="submit" value="Envoyer" />
+        <input type="submit" value="Créer une carte" />
       </form>
     );
   }
