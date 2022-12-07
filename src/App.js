@@ -1,48 +1,73 @@
 import React from 'react';
 import './App.css';
 
-function question() {
-  return (
-    <div>
-      <label for="question">Question: </label>
-      <textarea id="question" name="question" rows="5" cols="33"></textarea>
-    </div>
-  )
-}
+class Formulaire extends React.Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      question: 'Écrivez une question ici',
+      reponse: 'Écrivez une reponse ici',
+      explication: 'Écrivez une explication ici'
+    };
+    this.handleChangeQuestion = this.handleChangeQuestion.bind(this);
+    this.handleChangeReponse = this.handleChangeReponse.bind(this);
+    this.handleChangeExplication = this.handleChangeExplication.bind(this);
+    this.handleSubmit = this.handleSubmit.bind(this);
+  }
 
-function explication() {
-  return (
-    <div>
-      <label for="explication">Explication: </label>
-      <textarea id="explication" name="explication" rows="5" cols="33"></textarea>
-    </div>
-  )
-}
+  handleChangeQuestion(event) {
+    this.setState({question: event.target.value});
+  }
 
-function reponse() {
-  return (
-    <div>
-      <label for="reponse">Reponse: </label>
-      <textarea id="reponse" name="reponse" rows="5" cols="33"></textarea>
-    </div>
-  )
-}
+  handleChangeReponse(event) {
+    this.setState({reponse: event.target.value});
+  }
 
-function submit() {
-  return (
-    <button>
-      Créer une carte
-    </button>
-  )
+  handleChangeExplication(event) {
+    this.setState({explication: event.target.value});
+  }
+
+  handleSubmit(event) {
+    alert(
+      'Le formulaire contient : ' +
+      '\n' +
+      this.state.question +
+      '\n' +
+      this.state.reponse +
+      '\n' +
+      this.state.explication
+    );
+    event.preventDefault();
+  }
+
+  render() {
+    return (
+      <form onSubmit={this.handleSubmit}>
+        <label>
+          Question:
+          <textarea value={this.state.question} onChange={this.handleChangeQuestion} />
+        </label>
+        <br />
+        <label>
+          Reponse:
+          <textarea value={this.state.reponse} onChange={this.handleChangeReponse} />
+        </label>
+        <br />
+        <label>
+          Explication:
+          <textarea value={this.state.explication} onChange={this.handleChangeExplication} />
+        </label>
+        <br />
+        <input type="submit" value="Envoyer" />
+      </form>
+    );
+  }
 }
 
 function App() {
   return (
     <div className="App">
-      {question()}
-      {reponse()}
-      {explication()}
-      {submit()}
+      <Formulaire />
     </div>
   );
 }
